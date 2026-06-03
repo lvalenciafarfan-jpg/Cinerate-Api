@@ -2,6 +2,7 @@ package com.sistem.cinerate_api.entities;
 
 import com.sistem.cinerate_api.enums.CategoriaName;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "El nombre es obligatorio")
     @Enumerated(EnumType.STRING)
     private CategoriaName nombre;
 
