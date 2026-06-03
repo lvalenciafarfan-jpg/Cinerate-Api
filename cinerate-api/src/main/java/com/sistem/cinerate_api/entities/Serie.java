@@ -24,7 +24,7 @@ public class Serie {
     private String descripcion;
 
     @NotNull(message = "El año es necesario.")
-    private LocalDate año;
+    private LocalDate anio;
 
     @NotNull(message = "Las temporadas son obligatorias")
     @Min(value = 1, message = "Una serie debe tener como minimo 1 temporada.")
@@ -38,7 +38,7 @@ public class Serie {
     private BigDecimal calificacionPromedio;
 
     @OneToMany(mappedBy = "serie")
-    private List<Reseña> reseñas;
+    private List<Resena> resenas;
 
     @ManyToMany
     @JoinTable(

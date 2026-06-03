@@ -29,5 +29,5 @@ public class Usuario {
     private RolUsuario rol;
 
     @OneToMany(mappedBy = "usuario")
-    private List<Reseña> reseñas;
+    private List<Resena> resenas;
 }

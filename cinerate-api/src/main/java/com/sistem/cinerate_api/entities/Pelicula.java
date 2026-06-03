@@ -25,7 +25,7 @@ public class Pelicula {
     private String descripcion;
 
     @NotNull(message = "El año es necesario.")
-    private LocalDate año;
+    private LocalDate anio;
 
     @NotNull(message = "La duracion es obligatoria")
     @Min(value = 40, message = "La pelicula debe durar minimo 40 minutos")
@@ -39,7 +39,7 @@ public class Pelicula {
     private BigDecimal calificacionPromedio;
 
     @OneToMany(mappedBy = "pelicula")
-    private List<Reseña> reseñas;
+    private List<Resena> resenas;
 
     @ManyToMany
     @JoinTable(
