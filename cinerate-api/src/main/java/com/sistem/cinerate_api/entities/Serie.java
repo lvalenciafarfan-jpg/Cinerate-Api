@@ -3,6 +3,7 @@ package com.sistem.cinerate_api.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Serie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
