@@ -41,6 +41,4 @@ public class Resena {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @ManyToMany(mappedBy = "categorias")
-    private List<Serie> series;
 }
