@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class ResenaMapper {
 
-    public Resena ToEntity(ResenaRequest datos){
+    public static Resena ToEntity(ResenaRequest datos){
         Resena resena = new Resena();
         resena.setContenido(datos.getContenido());
         resena.setFecha(LocalDateTime.now());
@@ -17,7 +17,7 @@ public class ResenaMapper {
         return resena;
     }
 
-    public ResenaResponse ToResponse(Resena resena){
+    public static ResenaResponse ToResponse(Resena resena){
         ResenaResponse resenaResponse = new ResenaResponse();
         resenaResponse.setCalificacion(resena.getCalificacion());
         resenaResponse.setContenido(resena.getContenido());
