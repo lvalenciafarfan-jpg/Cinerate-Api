@@ -137,14 +137,14 @@ public class ResenaImpl implements ResenaService {
 
         if (peliculaId != null) {
             BigDecimal promedio = resenaRepository.calcularPromedioPelicula(peliculaId);
-            Pelicula pelicula = peliculaRepository.findById(peliculaId).get();
+            Pelicula pelicula = encontrarPelicula(peliculaId);
             pelicula.setCalificacionPromedio(promedio != null ? promedio : BigDecimal.ZERO);
             peliculaRepository.save(pelicula);
         }
 
         if (serieId != null) {
             BigDecimal promedio = resenaRepository.calcularPromedioSerie(serieId);
-            Serie serie = serieRepository.findById(serieId).get();
+            Serie serie = encontrarSerie(serieId);
             serie.setCalificacionPromedio(promedio != null ? promedio : BigDecimal.ZERO);
             serieRepository.save(serie);
         }
