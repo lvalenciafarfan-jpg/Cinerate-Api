@@ -100,7 +100,7 @@ public class ResenaImpl implements ResenaService {
     @Override
     public Page<ResenaResponse> listarPorPelicula(Long peliculaId, Pageable pageable) {
         if (!peliculaRepository.existsById(peliculaId)) {
-            throw new ReglaDeNegocioException("Pelicula no encontrada con id: " + peliculaId);
+            throw new RecursoNoEncontradoException("Pelicula no encontrada con id: " + peliculaId);
         }
 
         return resenaRepository.findByPelicula_id(peliculaId, pageable).
@@ -110,7 +110,7 @@ public class ResenaImpl implements ResenaService {
     @Override
     public Page<ResenaResponse> listarPorSerie(Long serieId, Pageable pageable) {
         if (!serieRepository.existsById(serieId)) {
-            throw new ReglaDeNegocioException("Serie no encontrada con id: " + serieId);
+            throw new RecursoNoEncontradoException("Serie no encontrada con id: " + serieId);
         }
 
         return resenaRepository.findBySerie_id(serieId, pageable).
@@ -120,7 +120,7 @@ public class ResenaImpl implements ResenaService {
     @Override
     public Page<ResenaResponse> listarPorUsuario(Long usuarioId, Pageable pageable) {
         if (!usuarioRepository.existsById(usuarioId)) {
-            throw new ReglaDeNegocioException("Usuario no encontrado con id: " + usuarioId);
+            throw new RecursoNoEncontradoException("Usuario no encontrado con id: " + usuarioId);
         }
 
         return resenaRepository.findByUsuario_Id(usuarioId, pageable).

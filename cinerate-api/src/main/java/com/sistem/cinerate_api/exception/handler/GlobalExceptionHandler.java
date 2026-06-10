@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(RecursoNoEncontradoException.class)
-    public ResponseEntity<ErrorResponse> handlerNotFound(RuntimeException ex){
+    public ResponseEntity<ErrorResponse> handlerNotFound(RecursoNoEncontradoException ex){
 
         ErrorResponse error = new ErrorResponse(
                 404, LocalDateTime.now(), ex.getMessage()
@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ReglaDeNegocioException.class)
-    public ResponseEntity<ErrorResponse> handlerReglaNegocio(RuntimeException ex){
+    public ResponseEntity<ErrorResponse> handlerReglaNegocio(ReglaDeNegocioException ex){
         ErrorResponse error = new ErrorResponse(
                 400, LocalDateTime.now(), ex.getMessage()
         );
