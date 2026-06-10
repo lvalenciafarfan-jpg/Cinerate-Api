@@ -6,6 +6,8 @@ import com.sistem.cinerate_api.entities.Pelicula;
 import com.sistem.cinerate_api.entities.Resena;
 import com.sistem.cinerate_api.entities.Serie;
 import com.sistem.cinerate_api.entities.Usuario;
+import com.sistem.cinerate_api.exception.custom.RecursoNoEncontradoException;
+import com.sistem.cinerate_api.exception.custom.ReglaDeNegocioException;
 import com.sistem.cinerate_api.mapper.ResenaMapper;
 import com.sistem.cinerate_api.repository.PeliculaRepository;
 import com.sistem.cinerate_api.repository.ResenaRepository;
@@ -38,17 +40,17 @@ public class ResenaImpl implements ResenaService {
 
     private Pelicula encontrarPelicula(Long id) {
         return peliculaRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("Pelicula no encontrada con id: " + id));
+                orElseThrow(() -> new RecursoNoEncontradoException("Pelicula no encontrada con id: " + id));
     }
 
     private Usuario encontrarUsuario(Long id) {
         return usuarioRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
+                orElseThrow(() -> new RecursoNoEncontradoException("Usuario no encontrado con id: " + id));
     }
 
     private Serie encontrarSerie(Long id) {
         return serieRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("Serie no encontrada con id: " + id));
+                orElseThrow(() -> new RecursoNoEncontradoException("Serie no encontrada con id: " + id));
     }
 
     @Override
@@ -57,7 +59,7 @@ public class ResenaImpl implements ResenaService {
         Usuario usuario = encontrarUsuario(usuarioId);
 
         if (resenaRepository.existsByUsuario_IdAndPelicula_Id(usuarioId, peliculaId)) {
-            throw new RuntimeException("El usuario ya reseñó esta película.");
+            throw new ReglaDeNegocioException("El usuario ya reseñó esta película.");
         }
 
         Resena resena = ResenaMapper.ToEntity(request);
@@ -79,7 +81,7 @@ public class ResenaImpl implements ResenaService {
         Usuario usuario = encontrarUsuario(usuarioId);
 
         if (resenaRepository.existsByUsuario_IdAndSerie_Id(usuarioId, serieId)) {
-            throw new RuntimeException("El usuario ya reseño esta serie.");
+            throw new ReglaDeNegocioException("El usuario ya reseño esta serie.");
         }
 
         Resena resena = ResenaMapper.ToEntity(request);
@@ -98,7 +100,7 @@ public class ResenaImpl implements ResenaService {
     @Override
     public Page<ResenaResponse> listarPorPelicula(Long peliculaId, Pageable pageable) {
         if (!peliculaRepository.existsById(peliculaId)) {
-            throw new RuntimeException("Pelicula no encontrada con id: " + peliculaId);
+            throw new ReglaDeNegocioException("Pelicula no encontrada con id: " + peliculaId);
         }
 
         return resenaRepository.findByPelicula_id(peliculaId, pageable).
@@ -108,7 +110,7 @@ public class ResenaImpl implements ResenaService {
     @Override
     public Page<ResenaResponse> listarPorSerie(Long serieId, Pageable pageable) {
         if (!serieRepository.existsById(serieId)) {
-            throw new RuntimeException("Serie no encontrada con id: " + serieId);
+            throw new ReglaDeNegocioException("Serie no encontrada con id: " + serieId);
         }
 
         return resenaRepository.findBySerie_id(serieId, pageable).
@@ -118,7 +120,7 @@ public class ResenaImpl implements ResenaService {
     @Override
     public Page<ResenaResponse> listarPorUsuario(Long usuarioId, Pageable pageable) {
         if (!usuarioRepository.existsById(usuarioId)) {
-            throw new RuntimeException("Usuario no encontrado con id: " + usuarioId);
+            throw new ReglaDeNegocioException("Usuario no encontrado con id: " + usuarioId);
         }
 
         return resenaRepository.findByUsuario_Id(usuarioId, pageable).
@@ -128,7 +130,7 @@ public class ResenaImpl implements ResenaService {
     @Override
     public void eliminarResena(Long resenaId) {
         Resena resena = resenaRepository.findById(resenaId).
-                orElseThrow(() -> new RuntimeException("Resena no encontrada con id: " + resenaId));
+                orElseThrow(() -> new RecursoNoEncontradoException("Resena no encontrada con id: " + resenaId));
 
         Long peliculaId = resena.getPelicula() != null ? resena.getPelicula().getId() : null;
         Long serieId = resena.getSerie() != null ? resena.getSerie().getId() : null;
