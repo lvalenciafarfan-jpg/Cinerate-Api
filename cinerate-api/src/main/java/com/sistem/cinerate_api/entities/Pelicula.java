@@ -38,7 +38,7 @@ public class Pelicula {
     @Digits(integer = 1, fraction = 1, message = "El entero debe ser 1, y el decimal igual.")
     @DecimalMin(value = "0.0", message = "El valor minimo es 0.0")
     @DecimalMax(value = "5.0", message = "El valor maximo es 5.0")
-    private BigDecimal calificacionPromedio;
+    private BigDecimal calificacionPromedio = BigDecimal.ZERO;
 
     @OneToMany(mappedBy = "pelicula")
     private List<Resena> resenas;

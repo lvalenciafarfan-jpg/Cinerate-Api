@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class PeliculaRequest {
@@ -23,4 +24,6 @@ public class PeliculaRequest {
     @Min(value = 40, message = "La pelicula debe durar minimo 40 minutos")
     @Max(value = 80, message = "La pelicula no debe durar mas de 2 horas.")
     private Integer duracion;
+
+    private List<Long> categoriaIds;
 }
